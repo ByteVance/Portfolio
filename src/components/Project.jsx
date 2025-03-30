@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 
 const projects = [
+  
   {
     title: "Tech Startup HQ",
     description: "A sleek office space designed to inspire innovation and collaboration. Features open workspaces, meeting pods, and recreational areas.",
@@ -49,7 +50,7 @@ const ProjectsShowcase = () => {
   const filteredProjects = activeCategory === "All" 
     ? projects 
     : projects.filter(project => project.category === activeCategory);
-
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   return (
     <div className="min-h-screen bg-white">
       {/* Navbar */}
@@ -62,22 +63,68 @@ const ProjectsShowcase = () => {
           />
           <span className="text-xl font-bold">ByteVance</span>
         </div>
-        <div className="space-x-6 hidden md:block">
-          <a href="/" className="text-blue-600 font-semibold hover:text-blue-800 transition">Home</a>
-          <a href="AboutUs" className="text-blue-600 font-semibold hover:text-blue-800 transition">About Us</a>
-          <a href="Services" className="text-blue-600 font-semibold hover:text-blue-800 transition">Services</a>
-          <a href="Project" className="text-blue-600 font-semibold hover:text-blue-800 transition border-b-2 border-blue-600 pb-1">Projects</a>
+        
+        {/* Mobile Menu Button */}
+        <div className="md:hidden">
+          <button 
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="text-blue-600 focus:outline-none"
+          >
+            {mobileMenuOpen ? (
+              // X icon when menu is open
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            ) : (
+              // Hamburger icon when menu is closed
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            )}
+          </button>
         </div>
+        
+        {/* Desktop Navigation */}
+        <div className="hidden md:block">
+          <div className="space-x-6">
+            <a href="/" className="text-blue-600 font-semibold hover:text-blue-800 transition">Home</a>
+            <a href="AboutUs" className="text-blue-600 font-semibold hover:text-blue-800 transition ">About Us</a>
+            <a href="Services" className="text-blue-600 font-semibold hover:text-blue-800 transition">Services</a>
+            <a href="Project" className="text-blue-600 font-semibold hover:text-blue-800 transition border-b-2 border-blue-600 pb-1">Projects</a>
+            <a href="faqs" className="text-blue-600 font-semibold hover:text-blue-800 transition">FAQs</a>
+          </div>
+        </div>
+        
+        {/* Contact Us Button - Hidden on mobile */}
         <button 
-            className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition shadow-md"
-            onClick={() => window.location.href = '/contact'}
-            >
-            Contact Us
+          className="hidden md:block bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition shadow-md"
+          onClick={() => window.location.href = '/contact'}
+        >
+          Contact Us
         </button>
       </nav>
 
+      {/* Mobile Menu - Shown when toggle is clicked */}
+      {mobileMenuOpen && (
+        <div className="md:hidden bg-white py-4 px-6 shadow-md">
+          <div className="flex flex-col space-y-4">
+            <a href="/" className="text-blue-600 font-semibold hover:text-blue-800 transition">Home</a>
+            <a href="AboutUs" className="text-blue-600 font-semibold hover:text-blue-800 transition">About Us</a>
+            <a href="Services" className="text-blue-600 font-semibold hover:text-blue-800 transition">Services</a>
+            <a href="Project" className="text-blue-600 font-semibold hover:text-blue-800 transition border-b-2 border-blue-600 pb-1">Projects</a>
+            <a href="faqs" className="text-blue-600 font-semibold hover:text-blue-800 transition">FAQs</a>
+            <button 
+              className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition shadow-md w-full mt-2"
+              onClick={() => window.location.href = '/contact'}
+            >
+              Contact Us
+            </button>
+          </div>
+        </div>
+      )}
+
       {/* Hero Section with Background Image */}
-      <div className="relative h-[60vh] flex items-center justify-center">
+      <div className="relative h-[70vh] flex items-center justify-center">
         {/* Background Image */}
         <div className="absolute inset-0 w-full h-full">
           <img

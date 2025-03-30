@@ -5,6 +5,7 @@ import DashboardPage from "./components/DashboardPage";
 import AboutUs from "./components/AboutUs";
 import Project from "./components/Project";
 import ContactUs from "./components/ContactUs";
+import FAQs from "./components/FAQs";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/aboutus" element={<AboutUs />} />
         <Route path="/project" element={<Project />} />
         <Route path="/contact" element={<ContactUs />} />
+        <Route path="/faqs" element={<FAQs />} />
       </Routes>
     </Router>
   );
